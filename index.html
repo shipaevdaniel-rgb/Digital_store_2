@@ -1,0 +1,1054 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DSHIPAEV.DIGITAL — цифровые товары и разработка</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #06070d;
+  --panel: rgba(255, 255, 255, 0.04);
+  --panel-2: rgba(255, 255, 255, 0.06);
+  --border: rgba(255, 255, 255, 0.10);
+  --text: #e9edf7;
+  --muted: #94a0b8;
+  --accent: #7c5cff;
+  --accent-2: #00d4ff;
+  --danger: #ff4d6d;
+  --radius: 18px;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background:
+    radial-gradient(700px 500px at 12% -10%, rgba(124, 92, 255, .30), transparent 60%),
+    radial-gradient(650px 500px at 88% 0%, rgba(0, 212, 255, .20), transparent 60%),
+    radial-gradient(900px 700px at 50% 115%, rgba(124, 92, 255, .15), transparent 60%);
+}
+
+.container { width: 100%; max-width: 1180px; margin: 0 auto; padding: 0 20px; }
+a { color: inherit; text-decoration: none; }
+img { max-width: 100%; display: block; }
+
+/* HEADER */
+.header {
+  position: sticky; top: 0; z-index: 50;
+  background: rgba(6, 7, 13, .72);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--border);
+}
+.header__inner {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 16px; height: 74px;
+}
+.brand { display: flex; align-items: center; gap: 12px; }
+.brand__logo {
+  width: 44px; height: 44px; border-radius: 13px;
+  display: grid; place-items: center;
+  font-weight: 800; font-size: 16px; color: #fff;
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  box-shadow: 0 8px 24px rgba(124, 92, 255, .45);
+  flex-shrink: 0;
+}
+.brand__text { display: flex; flex-direction: column; line-height: 1.15; }
+.brand__name { font-weight: 700; font-size: 16px; letter-spacing: .04em; }
+.brand__tag { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: .16em; }
+
+.nav { display: flex; align-items: center; gap: 8px; }
+.nav__link {
+  padding: 10px 18px; border-radius: 12px;
+  border: 1px solid var(--border);
+  background: var(--panel); color: var(--text);
+  font-size: 14px; font-weight: 500; font-family: inherit;
+  cursor: pointer; transition: .2s;
+  display: inline-block;
+}
+.nav__link:hover {
+  background: linear-gradient(135deg, rgba(124, 92, 255, .9), rgba(0, 212, 255, .8));
+  border-color: transparent; transform: translateY(-1px);
+}
+.admin-nav { display: flex; gap: 8px; }
+
+.burger {
+  display: none; flex-direction: column; gap: 5px;
+  background: var(--panel); border: 1px solid var(--border);
+  border-radius: 12px; padding: 11px 12px; cursor: pointer;
+}
+.burger span { width: 20px; height: 2px; background: var(--text); border-radius: 2px; }
+
+/* HERO */
+.hero { padding: 80px 0 60px; text-align: center; }
+.hero__inner { display: flex; flex-direction: column; align-items: center; }
+.badge {
+  display: inline-block; padding: 7px 16px; border-radius: 999px;
+  border: 1px solid var(--border); background: var(--panel);
+  font-size: 12px; letter-spacing: .14em; text-transform: uppercase;
+  color: var(--muted); margin-bottom: 22px;
+}
+.hero__title {
+  font-size: clamp(30px, 6vw, 60px); line-height: 1.1; font-weight: 800;
+  margin: 0 0 18px; max-width: 900px;
+  background: linear-gradient(120deg, #ffffff 25%, #b9a8ff 55%, #6ce3ff 90%);
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.hero__subtitle {
+  max-width: 680px; margin: 0 0 32px;
+  color: var(--muted); font-size: clamp(14px, 2.4vw, 17px);
+  white-space: pre-line;
+}
+.hero__actions { display: flex; gap: 14px; flex-wrap: wrap; justify-content: center; }
+
+/* BUTTONS */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  gap: 8px; padding: 14px 26px; border-radius: 14px;
+  border: 1px solid transparent; font-family: inherit;
+  font-size: 15px; font-weight: 600; cursor: pointer;
+  transition: .22s; white-space: nowrap; text-decoration: none;
+}
+.btn--primary {
+  color: #fff;
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  box-shadow: 0 10px 30px rgba(124, 92, 255, .40);
+}
+.btn--primary:hover { transform: translateY(-2px); box-shadow: 0 14px 38px rgba(124, 92, 255, .55); }
+.btn--ghost { background: var(--panel); border-color: var(--border); color: var(--text); }
+.btn--ghost:hover { background: var(--panel-2); }
+.btn--danger { background: rgba(255, 77, 109, .14); border-color: rgba(255, 77, 109, .5); color: #ff8095; }
+.btn--danger:hover { background: rgba(255, 77, 109, .25); }
+.btn--sm { padding: 10px 18px; font-size: 14px; border-radius: 11px; }
+.btn--full { width: 100%; }
+
+/* SECTIONS */
+.section { padding: 40px 0 80px; }
+.section__title { font-size: clamp(24px, 4vw, 34px); font-weight: 800; margin: 0 0 30px; }
+.section__title span {
+  background: linear-gradient(120deg, var(--accent), var(--accent-2));
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* GRID / CARDS */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 22px;
+}
+.card {
+  display: flex; flex-direction: column;
+  background: var(--panel); border: 1px solid var(--border);
+  border-radius: var(--radius); overflow: hidden;
+  transition: .25s; backdrop-filter: blur(8px);
+}
+.card:hover {
+  transform: translateY(-5px);
+  border-color: rgba(124, 92, 255, .55);
+  box-shadow: 0 20px 45px rgba(0, 0, 0, .45);
+}
+.card__image { aspect-ratio: 16 / 10; background: rgba(255, 255, 255, .03); overflow: hidden; }
+.card__image img { width: 100%; height: 100%; object-fit: cover; }
+.card__placeholder {
+  width: 100%; height: 100%; display: grid; place-items: center;
+  font-size: 42px; color: rgba(255, 255, 255, .12);
+  background: linear-gradient(135deg, rgba(124, 92, 255, .14), rgba(0, 212, 255, .08));
+}
+.card__body { display: flex; flex-direction: column; gap: 8px; padding: 18px; flex: 1; }
+.card__caption { font-size: 11px; text-transform: uppercase; letter-spacing: .14em; color: var(--accent-2); font-weight: 600; }
+.card__title { font-size: 17px; font-weight: 700; margin: 0; }
+.card__desc { font-size: 14px; color: var(--muted); margin: 0; flex: 1; white-space: pre-line; }
+.card__footer {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 12px; margin-top: 10px; padding-top: 14px;
+  border-top: 1px solid var(--border);
+}
+.card__price { font-size: 19px; font-weight: 800; color: #fff; }
+.empty { color: var(--muted); }
+
+/* FOOTER */
+.footer { border-top: 1px solid var(--border); background: rgba(255, 255, 255, .02); margin-top: 40px; }
+.footer__inner {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 40px; padding: 50px 20px 40px;
+}
+.footer__title { margin: 0 0 14px; font-size: 15px; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+.footer__text { color: var(--muted); font-size: 14px; margin: 10px 0 0; white-space: pre-line; }
+.footer__link { display: inline-block; color: var(--accent-2); font-weight: 600; margin-bottom: 6px; }
+.footer__bottom { border-top: 1px solid var(--border); padding: 18px 0; font-size: 13px; color: var(--muted); }
+
+/* MODALS */
+.modal {
+  position: fixed; inset: 0; z-index: 100;
+  display: none; align-items: center; justify-content: center;
+  padding: 20px; background: rgba(3, 4, 8, .78);
+  backdrop-filter: blur(8px);
+}
+.modal.open { display: flex; animation: fadeIn .2s ease; }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+.modal__box {
+  position: relative; width: 100%; max-width: 560px;
+  max-height: 85vh; overflow-y: auto; padding: 34px 30px;
+  border-radius: 22px;
+  background: linear-gradient(160deg, #14172a, #0b0d16);
+  border: 1px solid var(--border);
+  box-shadow: 0 30px 80px rgba(0, 0, 0, .65);
+  animation: pop .22s ease;
+}
+@keyframes pop { from { transform: translateY(14px) scale(.98); opacity: 0; } to { transform: none; opacity: 1; } }
+.modal__title { margin: 0 0 16px; font-size: 22px; }
+.modal__text { color: var(--muted); font-size: 15px; white-space: pre-line; margin: 0 0 14px; }
+.modal__close {
+  position: absolute; top: 14px; right: 16px;
+  width: 34px; height: 34px; border-radius: 10px;
+  border: 1px solid var(--border); background: var(--panel);
+  color: var(--text); font-size: 20px; line-height: 1;
+  cursor: pointer; transition: .2s;
+}
+.modal__close:hover { background: var(--panel-2); }
+
+.tg-link {
+  display: inline-block; margin-top: 6px;
+  padding: 13px 24px; border-radius: 14px;
+  font-weight: 700; color: #fff;
+  background: linear-gradient(135deg, #2aabee, #229ed9);
+  box-shadow: 0 10px 28px rgba(42, 171, 238, .35);
+}
+.pay-link {
+  display: block; padding: 14px 16px; border-radius: 12px;
+  background: rgba(0, 212, 255, .08);
+  border: 1px dashed rgba(0, 212, 255, .45);
+  color: var(--accent-2); font-size: 14px;
+  word-break: break-all; margin-bottom: 14px;
+}
+
+/* LOGIN */
+.login-wrap { min-height: 100vh; display: grid; place-items: center; padding: 24px; }
+.login-box {
+  width: 100%; max-width: 400px; padding: 36px 30px;
+  border-radius: 22px;
+  background: linear-gradient(160deg, #14172a, #0b0d16);
+  border: 1px solid var(--border);
+  box-shadow: 0 30px 80px rgba(0, 0, 0, .6);
+  display: flex; flex-direction: column; gap: 16px;
+}
+.login-box__title { margin: 0; font-size: 22px; }
+.login-box__sub { margin: -8px 0 8px; color: var(--muted); font-size: 14px; }
+.login-box__back { color: var(--muted); font-size: 14px; text-align: center; cursor: pointer; }
+.login-box__back:hover { color: var(--accent-2); }
+.alert {
+  padding: 12px 16px; border-radius: 12px;
+  background: rgba(255, 77, 109, .12);
+  border: 1px solid rgba(255, 77, 109, .4);
+  color: #ff8095; font-size: 14px;
+}
+
+/* FORMS */
+.field { display: flex; flex-direction: column; gap: 6px; font-size: 13px; color: var(--muted); }
+.field input, .field textarea {
+  width: 100%; padding: 12px 14px; border-radius: 12px;
+  border: 1px solid var(--border);
+  background: rgba(255, 255, 255, .04);
+  color: var(--text); font-family: inherit; font-size: 14px;
+  transition: .2s; resize: vertical;
+}
+.field input:focus, .field textarea:focus {
+  outline: none; border-color: var(--accent);
+  background: rgba(124, 92, 255, .08);
+}
+.field input[type="file"] { padding: 9px 12px; color: var(--muted); }
+.checkbox { display: flex; align-items: center; gap: 10px; color: var(--muted); font-size: 14px; }
+.form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 18px; }
+.field--full { grid-column: 1 / -1; }
+
+/* ADMIN */
+.admin { padding: 34px 0 80px; }
+.panel {
+  background: var(--panel); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 26px;
+  margin-bottom: 26px; backdrop-filter: blur(8px);
+}
+.panel__title { margin: 0 0 20px; font-size: 18px; font-weight: 700; }
+
+.product-row {
+  border: 1px solid var(--border); border-radius: 14px;
+  padding: 14px 16px; margin-bottom: 12px;
+  background: rgba(255, 255, 255, .02);
+}
+.product-row[open] { background: rgba(124, 92, 255, .06); }
+.product-row__summary {
+  display: flex; align-items: center; gap: 14px;
+  cursor: pointer; list-style: none;
+}
+.product-row__summary::-webkit-details-marker { display: none; }
+.product-row__thumb {
+  width: 48px; height: 48px; border-radius: 10px;
+  overflow: hidden; background: rgba(255, 255, 255, .05);
+  display: grid; place-items: center; color: var(--muted);
+  flex-shrink: 0;
+}
+.product-row__thumb img { width: 100%; height: 100%; object-fit: cover; }
+.product-row__title { flex: 1; font-weight: 600; font-size: 15px; }
+.product-row__price { color: var(--accent-2); font-weight: 700; }
+.product-row__form { margin-top: 18px; }
+.product-row__actions { display: flex; gap: 10px; flex-wrap: wrap; }
+
+/* RESPONSIVE */
+@media (max-width: 820px) {
+  .footer__inner { grid-template-columns: 1fr; gap: 28px; }
+  .form-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 720px) {
+  .burger { display: flex; }
+  .nav {
+    position: absolute; top: 74px; left: 0; right: 0;
+    flex-direction: column; align-items: stretch; gap: 10px;
+    padding: 16px 20px 22px;
+    background: rgba(10, 12, 22, .98);
+    border-bottom: 1px solid var(--border);
+    transform: translateY(-12px); opacity: 0; visibility: hidden;
+    transition: .22s;
+  }
+  .nav.open { transform: none; opacity: 1; visibility: visible; }
+  .nav__link { text-align: center; }
+  .hero { padding: 56px 0 40px; }
+  .section { padding: 26px 0 56px; }
+  .panel { padding: 20px 16px; }
+  .modal__box { padding: 28px 20px; }
+  .product-row__title { font-size: 14px; }
+  .product-row__price { font-size: 14px; }
+  .admin-nav .nav__link { padding: 8px 12px; font-size: 13px; }
+}
+@media (max-width: 420px) {
+  .grid { grid-template-columns: 1fr; }
+  .card__footer { flex-direction: column; align-items: stretch; }
+  .card__footer .btn { width: 100%; }
+}
+</style>
+</head>
+<body>
+
+<!-- ======================= САЙТ ======================= -->
+<div id="site-view">
+  <header class="header">
+    <div class="container header__inner">
+      <a class="brand" href="#" onclick="event.preventDefault(); goHome();">
+        <div class="brand__logo">DS</div>
+        <div class="brand__text">
+          <span class="brand__name" id="site-name">DSHIPAEV.DIGITAL</span>
+          <span class="brand__tag">digital services</span>
+        </div>
+      </a>
+      <button class="burger" id="burger" aria-label="Меню"><span></span><span></span><span></span></button>
+      <nav class="nav" id="nav">
+        <button class="nav__link" data-modal="about">О нас</button>
+        <button class="nav__link" data-modal="contacts">Контакты</button>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container hero__inner">
+        <span class="badge">Digital studio &amp; store</span>
+        <h1 class="hero__title" id="hero-title"></h1>
+        <p class="hero__subtitle" id="hero-subtitle"></p>
+        <div class="hero__actions">
+          <a href="#" class="btn btn--primary"
+             onclick="event.preventDefault(); document.getElementById('catalog').scrollIntoView({behavior:'smooth'});">Смотреть каталог</a>
+          <button class="btn btn--ghost" data-modal="contacts">Написать в Telegram</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="catalog">
+      <div class="container">
+        <h2 class="section__title">Каталог <span>товаров и услуг</span></h2>
+        <div class="grid" id="catalog-grid"></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer__inner">
+      <div class="footer__col">
+        <div class="brand">
+          <div class="brand__logo">DS</div>
+          <div class="brand__text">
+            <span class="brand__name" id="footer-site-name"></span>
+            <span class="brand__tag">digital services</span>
+          </div>
+        </div>
+        <p class="footer__text" id="footer-info"></p>
+      </div>
+      <div class="footer__col">
+        <h4 class="footer__title">Контакты</h4>
+        <a class="footer__link" id="footer-tg" href="#" target="_blank" rel="noopener"></a>
+        <p class="footer__text" id="footer-contact"></p>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <div class="container" style="display:flex; justify-content:space-between; gap:12px; flex-wrap:wrap;">
+        <span>© <span id="footer-year"></span> <span id="footer-copy-name"></span> — все права защищены</span>
+        <a href="#admin" style="color:var(--muted); font-size:12px; opacity:.6;">⚙ Панель управления</a>
+      </div>
+    </div>
+  </footer>
+</div>
+
+<!-- ======================= ЛОГИН ======================= -->
+<div id="login-view" style="display:none">
+  <div class="login-wrap">
+    <form class="login-box" id="login-form">
+      <h1 class="login-box__title">Вход в админ-панель</h1>
+      <p class="login-box__sub">Доступ только для администратора</p>
+      <div class="alert" id="login-error" style="display:none;"></div>
+      <label class="field"><span>Логин</span>
+        <input type="text" name="login" autocomplete="username" required>
+      </label>
+      <label class="field"><span>Пароль</span>
+        <input type="password" name="password" autocomplete="current-password" required>
+      </label>
+      <button class="btn btn--primary btn--full" type="submit">Войти</button>
+      <a class="login-box__back" onclick="goHome();">← На главную</a>
+    </form>
+  </div>
+</div>
+
+<!-- ======================= АДМИН ======================= -->
+<div id="admin-view" style="display:none">
+  <header class="header">
+    <div class="container header__inner">
+      <div class="brand">
+        <div class="brand__logo">DS</div>
+        <div class="brand__text">
+          <span class="brand__name">Админ-панель</span>
+          <span class="brand__tag">управление магазином</span>
+        </div>
+      </div>
+      <nav class="admin-nav">
+        <a class="nav__link" href="#" onclick="event.preventDefault(); goHome();">Открыть сайт</a>
+        <a class="nav__link" href="#" onclick="event.preventDefault(); logout();">Выйти</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="admin">
+    <div class="container">
+      <section class="panel">
+        <h2 class="panel__title">➕ Добавить товар</h2>
+        <form id="add-product-form">
+          <div class="form-grid">
+            <label class="field"><span>Название*</span>
+              <input type="text" name="title" required placeholder="Например: Telegram-бот под ключ">
+            </label>
+            <label class="field"><span>Подпись (кратко)</span>
+              <input type="text" name="caption" placeholder="Например: Разработка">
+            </label>
+            <label class="field field--full"><span>Описание</span>
+              <textarea name="description" rows="3" placeholder="Что входит в услугу/товар"></textarea>
+            </label>
+            <label class="field"><span>Цена*</span>
+              <input type="text" name="price" required placeholder="15 000 ₽">
+            </label>
+            <label class="field"><span>Ссылка СБП для этого товара</span>
+              <input type="text" name="sbp_link" placeholder="https://... (если пусто — общая)">
+            </label>
+            <label class="field field--full"><span>Картинка (до 5 МБ)</span>
+              <input type="file" name="image" accept="image/*">
+            </label>
+          </div>
+          <button class="btn btn--primary" type="submit">Добавить товар</button>
+        </form>
+      </section>
+
+      <section class="panel">
+        <h2 class="panel__title">📦 Товары (<span id="products-count">0</span>)</h2>
+        <div id="products-list"></div>
+      </section>
+
+      <section class="panel">
+        <h2 class="panel__title">⚙ Настройки сайта</h2>
+        <form id="settings-form">
+          <div class="form-grid">
+            <label class="field"><span>Название сайта</span>
+              <input type="text" name="site_name">
+            </label>
+            <label class="field"><span>Telegram</span>
+              <input type="text" name="telegram">
+            </label>
+            <label class="field field--full"><span>Заголовок-слоган</span>
+              <input type="text" name="hero_title">
+            </label>
+            <label class="field field--full"><span>Подзаголовок</span>
+              <textarea name="hero_subtitle" rows="2"></textarea>
+            </label>
+            <label class="field field--full"><span>Текст «О нас»</span>
+              <textarea name="about_text" rows="7"></textarea>
+            </label>
+            <label class="field field--full"><span>Текст «Контакты»</span>
+              <textarea name="contact_text" rows="2"></textarea>
+            </label>
+            <label class="field field--full"><span>Информация в подвале</span>
+              <textarea name="footer_info" rows="2"></textarea>
+            </label>
+            <label class="field field--full"><span>Ссылка СБП по умолчанию</span>
+              <input type="text" name="sbp_link" placeholder="https://... (ссылка на перевод по СБП)">
+            </label>
+          </div>
+          <button class="btn btn--primary" type="submit">Сохранить настройки</button>
+        </form>
+      </section>
+    </div>
+  </main>
+</div>
+
+<!-- ======================= МОДАЛКИ ======================= -->
+<div class="modal" id="modal-about">
+  <div class="modal__box">
+    <button class="modal__close" data-close>&times;</button>
+    <h3 class="modal__title">О нас</h3>
+    <p class="modal__text" id="about-text"></p>
+  </div>
+</div>
+
+<div class="modal" id="modal-contacts">
+  <div class="modal__box">
+    <button class="modal__close" data-close>&times;</button>
+    <h3 class="modal__title">Контакты</h3>
+    <p class="modal__text" id="contacts-text"></p>
+    <a class="tg-link" id="contacts-tg" href="#" target="_blank" rel="noopener">✈ @dshipaev</a>
+  </div>
+</div>
+
+<div class="modal" id="modal-pay">
+  <div class="modal__box">
+    <button class="modal__close" data-close>&times;</button>
+    <h3 class="modal__title">Оплата</h3>
+    <p class="modal__text">Товар: <strong id="pay-title"></strong></p>
+    <p class="modal__text">Переведите сумму по ссылке СБП ниже и напишите в Telegram — доступ откроем сразу.</p>
+    <a class="pay-link" id="pay-link" href="#" target="_blank" rel="noopener">ССЫЛКА_СБП_БУДЕТ_ДОБАВЛЕНА_ЗДЕСЬ</a>
+    <button class="btn btn--ghost btn--sm" id="copy-btn" type="button">Скопировать ссылку</button>
+  </div>
+</div>
+
+<script>
+/* =====================================================
+   CONFIG — смените логин и пароль на свои!
+   ===================================================== */
+const ADMIN_LOGIN = 'admin';
+const ADMIN_PASSWORD = 'admin123';
+
+/* ============ КЛЮЧИ ХРАНИЛИЩА ============ */
+const LS_SETTINGS = 'ds_settings_v1';
+const LS_PRODUCTS = 'ds_products_v1';
+const LS_AUTH     = 'ds_auth_v1';
+
+/* ============ ЗНАЧЕНИЯ ПО УМОЛЧАНИЮ ============ */
+const DEFAULT_SETTINGS = {
+  site_name: 'DSHIPAEV.DIGITAL',
+  hero_title: 'Цифровые товары и разработка под ключ',
+  hero_subtitle:
+    'Магазин цифровых товаров и студия разработки: сайты, лендинги, мини-приложения, Telegram-боты, программирование на заказ. Быстро, аккуратно, с поддержкой.',
+  about_text:
+    'Мы — команда разработчиков и дизайнеров, специализируемся на цифровых продуктах.\n\n' +
+    '• Программирование на заказ (Python, JavaScript, backend/API)\n' +
+    '• Вёрстка сайтов и лендингов (адаптив, анимации, высокий PageSpeed)\n' +
+    '• Создание мини-приложений (Telegram Mini Apps, Web Apps)\n' +
+    '• Разработка Telegram-ботов любой сложности (магазины, оплата, рассылки)\n' +
+    '• Цифровые товары: шаблоны, скрипты, гайды, готовые решения\n\n' +
+    'Работаем по договорённости, отвечаем быстро, даём гарантию на результат.',
+  contact_text: 'Пишите, если есть вопросы — отвечу быстро и по делу.',
+  telegram: '@dshipaev',
+  footer_info: 'ИП Иванов И.И. · ИНН 000000000000 · Работаем по всей России',
+  sbp_link: ''
+};
+
+const DEFAULT_PRODUCTS = [
+  {
+    id: 'demo-1',
+    title: 'Telegram-бот под ключ',
+    caption: 'Разработка',
+    description: 'Бот для бизнеса: приём заявок, оплата, рассылки, интеграция с CRM. Срок — от 3 дней.',
+    price: 'от 15 000 ₽',
+    image: '',
+    sbp_link: ''
+  },
+  {
+    id: 'demo-2',
+    title: 'Лендинг под ключ',
+    caption: 'Вёрстка',
+    description: 'Адаптивный лендинг с уникальным дизайном, анимациями и высокой скоростью загрузки.',
+    price: 'от 12 000 ₽',
+    image: '',
+    sbp_link: ''
+  },
+  {
+    id: 'demo-3',
+    title: 'Mini App для Telegram',
+    caption: 'Mini Apps',
+    description: 'Мини-приложение внутри Telegram: каталог, корзина, оплата, личный кабинет.',
+    price: 'от 25 000 ₽',
+    image: '',
+    sbp_link: ''
+  }
+];
+
+/* ============ УТИЛИТЫ ============ */
+function esc(v) {
+  return String(v == null ? '' : v).replace(/[&<>"']/g, c => ({
+    '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+  }[c]));
+}
+
+function uid() {
+  if (window.crypto && crypto.randomUUID) return crypto.randomUUID();
+  return 'id-' + Date.now() + '-' + Math.random().toString(36).slice(2, 8);
+}
+
+function readFileAsDataURL(file) {
+  return new Promise(resolve => {
+    if (!file) return resolve('');
+    if (!file.type.startsWith('image/')) {
+      alert('Можно загружать только изображения');
+      return resolve('');
+    }
+    if (file.size > 5 * 1024 * 1024) {
+      alert('Файл слишком большой (макс. 5 МБ)');
+      return resolve('');
+    }
+    const reader = new FileReader();
+    reader.onload = e => {
+      const img = new Image();
+      img.onload = () => {
+        const maxW = 900, maxH = 900;
+        const ratio = Math.min(maxW / img.width, maxH / img.height, 1);
+        const w = Math.round(img.width * ratio);
+        const h = Math.round(img.height * ratio);
+        const canvas = document.createElement('canvas');
+        canvas.width = w;
+        canvas.height = h;
+        canvas.getContext('2d').drawImage(img, 0, 0, w, h);
+        try { resolve(canvas.toDataURL('image/jpeg', 0.85)); }
+        catch (err) { resolve(e.target.result); }
+      };
+      img.onerror = () => resolve('');
+      img.src = e.target.result;
+    };
+    reader.onerror = () => resolve('');
+    reader.readAsDataURL(file);
+  });
+}
+
+/* ============ СЛОЙ ДАННЫХ ============ */
+function getSettings() {
+  try {
+    const raw = localStorage.getItem(LS_SETTINGS);
+    if (!raw) return Object.assign({}, DEFAULT_SETTINGS);
+    return Object.assign({}, DEFAULT_SETTINGS, JSON.parse(raw));
+  } catch (e) {
+    return Object.assign({}, DEFAULT_SETTINGS);
+  }
+}
+
+function saveSettings(obj) {
+  localStorage.setItem(LS_SETTINGS, JSON.stringify(obj));
+}
+
+function getProducts() {
+  try {
+    const raw = localStorage.getItem(LS_PRODUCTS);
+    if (!raw) return DEFAULT_PRODUCTS.slice();
+    const arr = JSON.parse(raw);
+    return Array.isArray(arr) ? arr : DEFAULT_PRODUCTS.slice();
+  } catch (e) {
+    return DEFAULT_PRODUCTS.slice();
+  }
+}
+
+function saveProducts(arr) {
+  localStorage.setItem(LS_PRODUCTS, JSON.stringify(arr));
+}
+
+function isLoggedIn() {
+  return localStorage.getItem(LS_AUTH) === '1';
+}
+
+/* ============ РЕНДЕР ПУБЛИЧНОЙ ЧАСТИ ============ */
+function renderSite() {
+  const s = getSettings();
+  const products = getProducts();
+
+  document.getElementById('site-name').textContent = s.site_name;
+  document.getElementById('footer-site-name').textContent = s.site_name;
+  document.getElementById('footer-copy-name').textContent = s.site_name;
+  document.getElementById('hero-title').textContent = s.hero_title;
+  document.getElementById('hero-subtitle').textContent = s.hero_subtitle;
+  document.getElementById('about-text').textContent = s.about_text;
+  document.getElementById('contacts-text').textContent = s.contact_text;
+  document.getElementById('footer-info').textContent = s.footer_info;
+  document.getElementById('footer-contact').textContent = s.contact_text;
+  document.getElementById('footer-year').textContent = new Date().getFullYear();
+
+  const tgUser = (s.telegram || '').replace(/^@/, '');
+  const tgUrl = 'https://t.me/' + tgUser;
+
+  const fTg = document.getElementById('footer-tg');
+  fTg.textContent = 'Telegram: ' + s.telegram;
+  fTg.href = tgUrl;
+
+  const cTg = document.getElementById('contacts-tg');
+  cTg.textContent = '✈ ' + s.telegram;
+  cTg.href = tgUrl;
+
+  document.title = s.site_name + ' — цифровые товары и разработка';
+
+  const grid = document.getElementById('catalog-grid');
+  if (!products.length) {
+    grid.innerHTML = '<p class="empty">Пока товаров нет — добавьте их через админ-панель.</p>';
+    return;
+  }
+
+  grid.innerHTML = products.map(p => `
+    <article class="card">
+      <div class="card__image">
+        ${p.image
+          ? `<img src="${esc(p.image)}" alt="${esc(p.title)}">`
+          : '<div class="card__placeholder">◇</div>'}
+      </div>
+      <div class="card__body">
+        ${p.caption ? `<span class="card__caption">${esc(p.caption)}</span>` : ''}
+        <h3 class="card__title">${esc(p.title)}</h3>
+        <p class="card__desc">${esc(p.description)}</p>
+        <div class="card__footer">
+          <span class="card__price">${esc(p.price)}</span>
+          <button class="btn btn--primary btn--sm pay-btn"
+                  data-title="${esc(p.title)}"
+                  data-link="${esc(p.sbp_link || '')}">Оплатить</button>
+        </div>
+      </div>
+    </article>
+  `).join('');
+}
+
+/* ============ РЕНДЕР АДМИНКИ ============ */
+function renderAdmin() {
+  const products = getProducts();
+  document.getElementById('products-count').textContent = products.length;
+
+  const list = document.getElementById('products-list');
+  if (!products.length) {
+    list.innerHTML = '<p class="empty">Товаров пока нет.</p>';
+  } else {
+    list.innerHTML = products.map(p => `
+      <details class="product-row" data-id="${esc(p.id)}">
+        <summary class="product-row__summary">
+          <div class="product-row__thumb">
+            ${p.image ? `<img src="${esc(p.image)}" alt="">` : '◇'}
+          </div>
+          <span class="product-row__title">${esc(p.title)}</span>
+          <span class="product-row__price">${esc(p.price)}</span>
+        </summary>
+        <form class="product-row__form edit-form" data-id="${esc(p.id)}">
+          <div class="form-grid">
+            <label class="field"><span>Название</span>
+              <input type="text" name="title" value="${esc(p.title)}" required>
+            </label>
+            <label class="field"><span>Подпись</span>
+              <input type="text" name="caption" value="${esc(p.caption)}">
+            </label>
+            <label class="field field--full"><span>Описание</span>
+              <textarea name="description" rows="3">${esc(p.description)}</textarea>
+            </label>
+            <label class="field"><span>Цена</span>
+              <input type="text" name="price" value="${esc(p.price)}" required>
+            </label>
+            <label class="field"><span>Ссылка СБП</span>
+              <input type="text" name="sbp_link" value="${esc(p.sbp_link)}">
+            </label>
+            <label class="field field--full"><span>Новая картинка (необязательно)</span>
+              <input type="file" name="image" accept="image/*">
+            </label>
+            ${p.image ? `<label class="checkbox field--full"><input type="checkbox" name="remove_image"> Удалить текущую картинку</label>` : ''}
+          </div>
+          <div class="product-row__actions">
+            <button class="btn btn--primary btn--sm" type="submit">Сохранить</button>
+            <button class="btn btn--danger btn--sm" type="button" data-delete="${esc(p.id)}">Удалить</button>
+          </div>
+        </form>
+      </details>
+    `).join('');
+
+    list.querySelectorAll('.edit-form').forEach(f => f.addEventListener('submit', onEditProduct));
+  }
+
+  // Заполняем форму настроек
+  const s = getSettings();
+  const sf = document.getElementById('settings-form');
+  Object.keys(DEFAULT_SETTINGS).forEach(k => {
+    if (sf.elements[k]) sf.elements[k].value = s[k] || '';
+  });
+}
+
+/* ============ СОХРАНЕНИЕ ТОВАРА ============ */
+async function onAddProduct(e) {
+  e.preventDefault();
+  const form = e.target;
+  const data = new FormData(form);
+
+  const fileInput = form.querySelector('input[name="image"]');
+  let image = '';
+  if (fileInput && fileInput.files[0]) {
+    image = await readFileAsDataURL(fileInput.files[0]);
+    if (!image) return;
+  }
+
+  const products = getProducts();
+  products.unshift({
+    id: uid(),
+    title: (data.get('title') || '').trim(),
+    caption: (data.get('caption') || '').trim(),
+    description: (data.get('description') || '').trim(),
+    price: (data.get('price') || '').trim(),
+    sbp_link: (data.get('sbp_link') || '').trim(),
+    image
+  });
+
+  try {
+    saveProducts(products);
+    form.reset();
+    renderAdmin();
+    renderSite();
+  } catch (err) {
+    alert('Не удалось сохранить: возможно, превышен лимит localStorage. Попробуйте картинку поменьше.');
+  }
+}
+
+async function onEditProduct(e) {
+  e.preventDefault();
+  const form = e.target;
+  const id = form.dataset.id;
+  const products = getProducts();
+  const idx = products.findIndex(p => p.id === id);
+  if (idx === -1) return;
+
+  const p = products[idx];
+  const data = new FormData(form);
+
+  let image = p.image;
+  if (data.get('remove_image')) image = '';
+
+  const fileInput = form.querySelector('input[name="image"]');
+  if (fileInput && fileInput.files[0]) {
+    const b64 = await readFileAsDataURL(fileInput.files[0]);
+    if (b64) image = b64;
+  }
+
+  products[idx] = Object.assign({}, p, {
+    title: (data.get('title') || '').trim(),
+    caption: (data.get('caption') || '').trim(),
+    description: (data.get('description') || '').trim(),
+    price: (data.get('price') || '').trim(),
+    sbp_link: (data.get('sbp_link') || '').trim(),
+    image
+  });
+
+  try {
+    saveProducts(products);
+    renderAdmin();
+    renderSite();
+  } catch (err) {
+    alert('Не удалось сохранить: возможно, превышен лимит localStorage. Попробуйте картинку поменьше.');
+  }
+}
+
+function deleteProduct(id) {
+  if (!confirm('Удалить товар?')) return;
+  const products = getProducts().filter(p => p.id !== id);
+  try {
+    saveProducts(products);
+    renderAdmin();
+    renderSite();
+  } catch (err) {
+    alert('Ошибка при удалении.');
+  }
+}
+
+/* ============ НАВИГАЦИЯ / АВТОРИЗАЦИЯ ============ */
+function showView(name) {
+  document.getElementById('site-view').style.display  = name === 'site'  ? '' : 'none';
+  document.getElementById('login-view').style.display = name === 'login' ? '' : 'none';
+  document.getElementById('admin-view').style.display = name === 'admin' ? '' : 'none';
+  window.scrollTo(0, 0);
+}
+
+function navigate() {
+  const hash = (location.hash || '').replace(/^#\/?/, '');
+  if (hash === 'admin') {
+    if (isLoggedIn()) {
+      renderAdmin();
+      showView('admin');
+    } else {
+      showView('login');
+    }
+  } else {
+    renderSite();
+    showView('site');
+  }
+}
+
+function goHome() {
+  if (location.hash) {
+    location.hash = '';
+    // hashchange вызовет navigate()
+  } else {
+    navigate();
+  }
+}
+
+function logout() {
+  localStorage.removeItem(LS_AUTH);
+  navigate();
+}
+
+/* ============ ОБРАБОТЧИКИ ============ */
+document.addEventListener('DOMContentLoaded', () => {
+  // Инициализация данных при первом запуске
+  if (!localStorage.getItem(LS_SETTINGS)) saveSettings(DEFAULT_SETTINGS);
+  if (!localStorage.getItem(LS_PRODUCTS)) saveProducts(DEFAULT_PRODUCTS);
+
+  // Логин
+  document.getElementById('login-form').addEventListener('submit', e => {
+    e.preventDefault();
+    const form = e.target;
+    const login = form.elements.login.value.trim();
+    const pass = form.elements.password.value;
+    const err = document.getElementById('login-error');
+    if (login === ADMIN_LOGIN && pass === ADMIN_PASSWORD) {
+      localStorage.setItem(LS_AUTH, '1');
+      form.reset();
+      err.style.display = 'none';
+      navigate();
+    } else {
+      err.textContent = 'Неверный логин или пароль';
+      err.style.display = '';
+    }
+  });
+
+  // Добавление товара
+  document.getElementById('add-product-form').addEventListener('submit', onAddProduct);
+
+  // Сохранение настроек
+  document.getElementById('settings-form').addEventListener('submit', e => {
+    e.preventDefault();
+    const form = e.target;
+    const s = {};
+    Object.keys(DEFAULT_SETTINGS).forEach(k => {
+      s[k] = form.elements[k] ? form.elements[k].value : '';
+    });
+    saveSettings(s);
+    renderSite();
+    renderAdmin();
+    alert('Настройки сохранены');
+  });
+
+  // Burger
+  document.getElementById('burger').addEventListener('click', () => {
+    document.getElementById('nav').classList.toggle('open');
+  });
+
+  // Копирование ссылки СБП
+  document.getElementById('copy-btn').addEventListener('click', () => {
+    const text = document.getElementById('pay-link').textContent;
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(() => {
+        const b = document.getElementById('copy-btn');
+        b.textContent = 'Скопировано ✓';
+        setTimeout(() => b.textContent = 'Скопировать ссылку', 1500);
+      });
+    }
+  });
+
+  // Делегирование кликов: модалки, оплата, удаление
+  document.addEventListener('click', e => {
+    // Открыть модалку
+    const openBtn = e.target.closest('[data-modal]');
+    if (openBtn) {
+      e.preventDefault();
+      const m = document.getElementById('modal-' + openBtn.dataset.modal);
+      if (m) {
+        m.classList.add('open');
+        document.getElementById('nav').classList.remove('open');
+      }
+      return;
+    }
+
+    // Кнопка "Оплатить"
+    const payBtn = e.target.closest('.pay-btn');
+    if (payBtn) {
+      e.preventDefault();
+      const link = (payBtn.dataset.link || getSettings().sbp_link || '').trim();
+      document.getElementById('pay-title').textContent = payBtn.dataset.title;
+      const payLink = document.getElementById('pay-link');
+      if (link) {
+        payLink.textContent = link;
+        payLink.href = link;
+      } else {
+        payLink.textContent = 'ССЫЛКА_СБП_БУДЕТ_ДОБАВЛЕНА_ЗДЕСЬ';
+        payLink.href = '#';
+      }
+      document.getElementById('modal-pay').classList.add('open');
+      return;
+    }
+
+    // Кнопка "Удалить" товар
+    const delBtn = e.target.closest('[data-delete]');
+    if (delBtn) {
+      e.preventDefault();
+      deleteProduct(delBtn.dataset.delete);
+      return;
+    }
+
+    // Закрыть модалку по клику на фон
+    if (e.target.classList.contains('modal')) {
+      e.target.classList.remove('open');
+    }
+    // Закрыть по крестику
+    if (e.target.hasAttribute('data-close')) {
+      const m = e.target.closest('.modal');
+      if (m) m.classList.remove('open');
+    }
+  });
+
+  // Escape закрывает модалки
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') {
+      document.querySelectorAll('.modal.open').forEach(m => m.classList.remove('open'));
+    }
+  });
+
+  // Роутинг
+  window.addEventListener('hashchange', navigate);
+  navigate();
+});
+</script>
+</body>
+</html>
